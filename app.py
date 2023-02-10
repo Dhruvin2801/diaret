@@ -60,7 +60,7 @@ db=firebase.database()
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template("index.html")
 
 @app.route('/login')
 def login():
@@ -72,19 +72,19 @@ def signup():
 
 @app.route('/patient')
 def patient():
-    return render_template('patient.html')
+    return render_template("patient.html")
 
 @app.route('/doctor')
 def doctor():
-    return render_template('doctor.html')
+    return render_template("doctor.html")
 
 @app.route('/posebots')
 def posebots():
-    return render_template('posebots.html')
+    return render_template("posebots.html")
 
 @app.route('/posebot')
 def posebot():
-    return render_template('posebot.html')
+    return render_template("posebot.html")
 
 
 @app.route('/palming',methods=['POST','GET'])
@@ -126,16 +126,16 @@ def login_patient():
         flag2=1
         for user in users.each():
             if(user.val()==email):
-                print('found')
+                print("FOUND")
                 flag=1
     if(flag==1 and flag2==1):
         try:
             auth.sign_in_with_email_and_password(email, password)
             print("Patient Succesfully SignedIn")
-            return render_template('patient.html', name=name) 
+            return render_template("patient.html", name=name) 
         except:
             print("Invalid User Or Password")
-    return render_template('login.html')
+    return render_template("login.html")
 
 @app.route('/login/doctor',methods=['POST','GET'])
 def login_doctor():
@@ -160,7 +160,7 @@ def login_doctor():
             return render_template('doctor.html', name=name) 
         except:
             print("Invalid User Or Password")
-    return render_template('login.html')
+    return render_template("login.html")
 
 
 @app.route('/signup/doctor',methods=['POST','GET'])
@@ -183,7 +183,7 @@ def signup_doctor():
             return render_template('doctor.html', name=name)
         except:
             print("Email already Exists")
-    return render_template('signup.html')
+    return render_template("signup.html")
 
 @app.route('/signup/patient',methods=['POST','GET'])
 def signup_patient():
@@ -206,7 +206,7 @@ def signup_patient():
             return render_template('patient.html', name=name)
         except:
             print("Email already Exists")
-    return render_template('signup.html')
+    return render_template("signup.html")
 
 
 @app.route('/view_patients', methods=['POST','GET'])
@@ -247,7 +247,7 @@ def recommend():
     name=int_features[0]
     details = db.child("Patient").child(name).get()
     dr=(details.val()['dr'])
-    return render_template('posebots.html', name=name, dr=dr)
+    return render_template("posebots.html", name=name, dr=dr)
 
 
 
